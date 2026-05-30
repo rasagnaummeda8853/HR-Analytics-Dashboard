@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>data_Cleaning.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #7a7e85;}
+.s1 { color: #bcbec4;}
+.s2 { color: #cf8e6d;}
+.s3 { color: #bcbec4;}
+.s4 { color: #6aab73;}
+.s5 { color: #2aacb8;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+data_Cleaning.py</font>
+</center></td></tr></table>
+<pre><span class="s0">#%%</span>
+<span class="s2">import </span><span class="s1">pandas </span><span class="s2">as </span><span class="s1">pd</span>
+<span class="s1">df</span><span class="s3">=</span><span class="s1">pd</span><span class="s3">.</span><span class="s1">read_csv</span><span class="s3">(</span><span class="s4">r&quot;C:\Users\ummed\Downloads\HR-Employee-Attrition.csv&quot;</span><span class="s3">)</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">.</span><span class="s1">head</span><span class="s3">())</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">.</span><span class="s1">info</span><span class="s3">())</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">.</span><span class="s1">shape</span><span class="s3">)</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">.</span><span class="s1">isnull</span><span class="s3">().</span><span class="s1">sum</span><span class="s3">())</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">.</span><span class="s1">columns</span><span class="s3">)</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">.</span><span class="s1">dtypes</span><span class="s3">)</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">.</span><span class="s1">duplicated</span><span class="s3">().</span><span class="s1">sum</span><span class="s3">())</span>
+<span class="s0">#%%</span>
+<span class="s1">df</span><span class="s3">=</span><span class="s1">df</span><span class="s3">.</span><span class="s1">drop_duplicates</span><span class="s3">()</span>
+<span class="s0">#%%</span>
+<span class="s1">df</span><span class="s3">[</span><span class="s4">'AgeGroup'</span><span class="s3">]=</span><span class="s1">pd</span><span class="s3">.</span><span class="s1">cut</span><span class="s3">(</span>
+    <span class="s1">df</span><span class="s3">[</span><span class="s4">'Age'</span><span class="s3">],</span>
+    <span class="s1">bins</span><span class="s3">=[</span><span class="s5">18</span><span class="s3">,</span><span class="s5">25</span><span class="s3">,</span><span class="s5">35</span><span class="s3">,</span><span class="s5">45</span><span class="s3">,</span><span class="s5">60</span><span class="s3">],</span>
+    <span class="s1">labels</span><span class="s3">=[</span><span class="s4">'18-25'</span><span class="s3">,</span><span class="s4">'26-35'</span><span class="s3">,</span><span class="s4">'36-45'</span><span class="s3">,</span><span class="s4">'46-60'</span><span class="s3">]</span>
+<span class="s3">)</span>
+<span class="s0">#%%</span>
+<span class="s1">df</span><span class="s3">.</span><span class="s1">to_csv</span><span class="s3">(</span>
+    <span class="s4">&quot;HR_Cleaned.csv&quot;</span><span class="s3">,</span>
+    <span class="s1">index</span><span class="s3">=</span><span class="s2">False</span>
+<span class="s3">)</span>
+<span class="s0">#%%</span>
+<span class="s2">import </span><span class="s1">pandas </span><span class="s2">as </span><span class="s1">pd</span>
+
+<span class="s1">df</span><span class="s3">=</span><span class="s1">pd</span><span class="s3">.</span><span class="s1">read_csv</span><span class="s3">(</span><span class="s4">r&quot;C:\Users\ummed\Downloads\HR-Employee-Attrition.csv&quot;</span><span class="s3">)</span>
+
+<span class="s1">df</span><span class="s3">.</span><span class="s1">to_csv</span><span class="s3">(</span>
+    <span class="s4">&quot;HR_Cleaned.csv&quot;</span><span class="s3">,</span>
+    <span class="s1">index</span><span class="s3">=</span><span class="s2">False</span>
+<span class="s3">)</span>
+
+<span class="s1">print</span><span class="s3">(</span><span class="s4">&quot;File Saved Successfully&quot;</span><span class="s3">)</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">[[</span><span class="s4">'Age'</span><span class="s3">,</span><span class="s4">'AgeGroup'</span><span class="s3">]].</span><span class="s1">head</span><span class="s3">())</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">[[</span><span class="s4">'Attrition'</span><span class="s3">]].</span><span class="s1">value_counts</span><span class="s3">())</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">[[</span><span class="s4">'Department'</span><span class="s3">]].</span><span class="s1">value_counts</span><span class="s3">())</span>
+<span class="s0">#%%</span>
+<span class="s1">print</span><span class="s3">(</span><span class="s1">df</span><span class="s3">.</span><span class="s1">groupby</span><span class="s3">(</span><span class="s4">'Department'</span><span class="s3">)[</span><span class="s4">'MonthlyIncome'</span><span class="s3">].</span><span class="s1">mean</span><span class="s3">())</span>
+<span class="s0">#%%</span>
+</pre>
+</body>
+</html>
